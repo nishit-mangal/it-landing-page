@@ -1,0 +1,26 @@
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px; /* Adjust width as needed */
+  background: #1b4661; /* Your indigo color */
+  border-radius: 5px; /* Hide scrollbar for Chrome, Safari, and Edge */
+  scrollbar-width: thick; /* or auto, or thin, or medium, or thick */
+  scrollbar-color: indigo #f1f1f1;
+}
+
+.sector-tile{
+  height:350px;
+  padding: 1rem;
+  background-color: #e8f6ff;
+  border: 1px solid #e2e8f0; /* Equivalent to Tailwind's default border color */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Tailwind's shadow-md */
+  border-radius: 0.5rem;
+  .tile-heading{
+    background-color: #1b4661;
+    text-align: center;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    margin: 0.5rem 0 0.5rem 0;
+    font-size: 1.5rem /* 24px */;
+    line-height: 2rem;
+    font-weight: 600;
+    border-radius: 1.5rem;
+  }
+}
