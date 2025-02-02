@@ -3,9 +3,81 @@ import gsap from "gsap";
 import mainPic from "../src/Images/MainPic.jpg";
 import "./App.css"
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
 gsap.registerPlugin(ScrollTrigger);
-// gsap.registerPlugin()
+
+const testimonials = [
+  {
+    industry: "Finance and Banking",
+    quote: "Our bank needed a robust and secure cloud solution to handle increasing transaction volumes. [Company Name] delivered a seamless migration and their ongoing support has been exceptional.",
+    author: "Sarah Miller, CIO, Global Finance Corp."
+  },
+  {
+    industry: "Healthcare and Lifesciences",
+    quote: "Patient data security is paramount. [Company Name] developed a HIPAA-compliant system that streamlined our operations and ensured the highest level of data protection.",
+    author: "Dr. Emily Carter, Medical Director, City General Hospital"
+  },
+  // ... add all your other testimonials here
+  {
+    industry: "Government and public sector",
+    quote: "We needed a secure and reliable system to manage citizen data. [Company Name] delivered a solution that met all our requirements and exceeded our expectations. Their commitment to public service is commendable.",
+    author: "Mayor Tom Williams, City of Springfield"
+  },
+  {
+    industry: "Finance and Banking",
+    quote: "Our bank needed a robust and secure cloud solution to handle increasing transaction volumes. [Company Name] delivered a seamless migration and their ongoing support has been exceptional.",
+    author: "Sarah Miller, CIO, Global Finance Corp."
+  },
+  {
+    industry: "Healthcare and Lifesciences",
+    quote: "Patient data security is paramount. [Company Name] developed a HIPAA-compliant system that streamlined our operations and ensured the highest level of data protection.",
+    author: "Dr. Emily Carter, Medical Director, City General Hospital"
+  },
+  // ... add all your other testimonials here
+  {
+    industry: "Government and public sector",
+    quote: "We needed a secure and reliable system to manage citizen data. [Company Name] delivered a solution that met all our requirements and exceeded our expectations. Their commitment to public service is commendable.",
+    author: "Mayor Tom Williams, City of Springfield"
+  }
+];
 export const App = () => {
+  var settings = {
+    dots: true,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1280,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true
+        }
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true
+        }
+      },
+      {
+        breakpoint: 640,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
+  };
+  
   useGSAP(() => {
     gsap.from(".hero-text", {
       opacity: 0,
@@ -33,6 +105,20 @@ export const App = () => {
         scrub:true,
         start: "top 80%",
         end: "top 30%",
+        // markers: true
+      }
+    });
+    gsap.from(".carousal-title",{
+      y:200,
+      fontSize:0,
+      opacity:0,
+      duration: 2,
+      scrollTrigger: {
+        toggleActions: "restart none none none",
+        trigger:".carousal-title",
+        scrub:true,
+        start: "top 80%",
+        end: "top 20%",
         markers: true
       }
     })
@@ -65,7 +151,7 @@ export const App = () => {
             <h2 className="hero-text text-5xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl 2xl:text-9xl py-8 font-extrabold text-teal-800 text-left">
               Innovate. Secure. Transform.
             </h2>
-            <p className="hero-subtext text-lg sm:text-xl lg:text-lg xl:text-xl 2xl:text-2xl font-medium font-sans text-black-600 text-justify">
+            <p className="hero-subtext text-lg sm:text-lg lg:text-lg xl:text-xl 2xl:text-2xl font-medium font-sans text-black-600 text-justify">
               Empowering businesses in Education Tech, Fintech, Cyber Security,
               AI, and Machine Learning with cutting-edge solutions. Our
               expertise enables seamless digital transformations, providing
@@ -83,6 +169,7 @@ export const App = () => {
         </section>
       </div>
 
+      <div className="mt-36 px-7 text-center font-serif font-extrabold text-4xl sm:text-5xl lg:text-7xl 2xl:text-9xl text-[#1B4661]">Industries we cater</div>
       <div
         id="sectors"
         className="px-8 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 py-20 gap-8 md:gap-12 xl:gap-16"
@@ -180,7 +267,28 @@ export const App = () => {
         </div>
       </div>
 
-
+      <section className="carousal-title px-4 sm:px-6 lg:px-8 h-screen bg-[#2d564f] rounded-t-3xl"> 
+        <div className="h-1/5 py-6 px-7 text-center font-serif font-extrabold text-2xl sm:text-4xl lg:text-6xl 2xl:text-8xl text-white mb-0 2xl:mb-16">What Our Clients Say</div>
+        <div className="mx-2 sm:mx-8 lg:mx-12 2xl:mx-16">          
+          <Slider {...settings}>
+            {testimonials.map((testimonial, index) => (
+              <div key={index} className="bg-[#f6fffe] rounded-lg shadow-md p-6 h-72 mb-6">
+                <p className="text-sm lg:text-base text-gray-700 italic h-4/5 overflow-y-auto">
+                  "{testimonial.quote}"
+                </p>
+                <div className="flex flex-col mt-2 justify-between">
+                  <p className="text-xs lg:text-sm text-right font-medium text-gray-800">
+                    {testimonial.author}
+                  </p>
+                  <p className="text-xs text-right text-gray-500">
+                    {testimonial.industry}
+                  </p>
+                </div>
+              </div>
+            ))}    
+          </Slider>          
+        </div>   
+      </section>
     </>
   );
 };
